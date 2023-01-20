@@ -13,3 +13,4 @@ Really need to work on writing clean code.
 
 Day 3
 Cleaning up code and firing shots.
+Got the projectiles spawning and moving in the right direction.

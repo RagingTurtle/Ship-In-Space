@@ -217,6 +217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1173806957}
   - component: {fileID: 1173806958}
+  - component: {fileID: 1173806959}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -253,10 +254,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ship: {fileID: 1173806957}
-  maxSpeed: 12.26
-  slowDownAmount: 0.001
-  speedUpAmount: 0.002
-  moveAdjustmentAmount: 0.002
+  maxMoveSpeed: 12
+  deceleration: 0.001
+  acceleration: 0.002
+  rotationSpeed: 0.002
+--- !u!114 &1173806959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173806956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28bebfbac6ab251458b5b69b669bfe23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 7674549877459066025, guid: d229f004b4e4edd43bfd7dbae923cde1, type: 3}
+  rateOfFire: 1
 --- !u!1 &1479648085
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,26 +6,22 @@ using System;
 public class Movement : MonoBehaviour
 {
     [SerializeField] private Transform ship;
-    [SerializeField] private float maxSpeed = .5f;
-    private float speed;
+    [SerializeField] private float maxMoveSpeed = 12f;
+    private float moveSpeed;
+    const float STOP_SPEED = 0;
     private Vector3 moveDirection;
-    [SerializeField] private float slowDownAmount = .001f;
-    [SerializeField] private float speedUpAmount = .001f;
-    [SerializeField] private float moveAdjustmentAmount = .001f;
+    [SerializeField] private float deceleration = .001f;
+    [SerializeField] private float acceleration = .002f;
+    [SerializeField] private float rotationSpeed = .002f;
 
     private void Start()
     {
         moveDirection = ship.forward;
-        speed = 0;
+        moveSpeed = STOP_SPEED;
     }
     void Update()
     {
-        SlowDown();
-        Thrust();
         Move();
-        RotatLeft();
-        RotatRight();
-        print(speed);
     }
 
     private void RotatLeft()
@@ -45,20 +41,25 @@ public class Movement : MonoBehaviour
 
     private void SlowDown()
     {
-        speed = Mathf.Lerp(speed, 0, slowDownAmount);
+        moveSpeed = Mathf.Lerp(moveSpeed, STOP_SPEED, deceleration);
     }
 
-    private void Thrust()
+    private void SpeedUp()
     {
         if (Input.GetKey(KeyCode.W))
         {
-            moveDirection = Vector3.Lerp(moveDirection, ship.forward, moveAdjustmentAmount);
-            speed = Mathf.Lerp(speed, maxSpeed, speedUpAmount);
+            moveDirection = Vector3.Lerp(moveDirection, ship.forward, rotationSpeed);
+            moveSpeed = Mathf.Lerp(moveSpeed, maxMoveSpeed, acceleration);
         }
     }
 
     private void Move()
     {
-        ship.position += moveDirection * speed * Time.deltaTime;
+        SlowDown();
+        SpeedUp();
+        RotatLeft();
+        RotatRight();
+
+        ship.position += moveDirection * moveSpeed * Time.deltaTime;
     }
 }
